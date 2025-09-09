@@ -5,35 +5,35 @@
   },
   "build": {
     "local-apk": {
-      "developmentClient": true,
+      "developmentClient": false,
       "distribution": "internal",
       "android": {
         "buildType": "apk"
       },
       "env": {
-        "GRADLE_OPTS": "-Xmx4096m -XX:MaxMetaspaceSize=1024m -Dorg.gradle.daemon=false",
+        "GRADLE_OPTS": "-Xmx3072m -XX:MaxMetaspaceSize=1024m -Dorg.gradle.daemon=false",
         "NODE_OPTIONS": "--max-old-space-size=2048"
       }
     },
     "local-aab": {
-      "developmentClient": true,
+      "developmentClient": false,
       "distribution": "internal",
       "android": {
         "buildType": "app-bundle"
       },
       "env": {
-        "GRADLE_OPTS": "-Xmx4096m -XX:MaxMetaspaceSize=1024m -Dorg.gradle.daemon=false",
+        "GRADLE_OPTS": "-Xmx3072m -XX:MaxMetaspaceSize=1024m -Dorg.gradle.daemon=false",
         "NODE_OPTIONS": "--max-old-space-size=2048"
       }
     },
     "local-simple": {
-      "developmentClient": true,
+      "developmentClient": false,
       "distribution": "internal",
       "android": {
         "buildType": "apk"
       },
       "env": {
-        "GRADLE_OPTS": "-Xmx4096m -XX:MaxMetaspaceSize=1024m -Dorg.gradle.daemon=false",
+        "GRADLE_OPTS": "-Xmx3072m -XX:MaxMetaspaceSize=1024m -Dorg.gradle.daemon=false",
         "NODE_OPTIONS": "--max-old-space-size=2048"
       }
     }
