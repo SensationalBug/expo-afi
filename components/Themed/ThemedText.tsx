@@ -2,38 +2,38 @@ import { StyleSheet, Text, View, type TextProps } from "react-native";
 
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme.web";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { IconSymbol, IconSymbolName } from "../ui/IconSymbol";
 
 export type ThemedTextProps = TextProps & {
-  lightColor?: string;
-  darkColor?: string;
   iconName?: IconSymbolName;
   alignSelf?: "auto" | "flex-start" | "flex-end" | "center" | "stretch";
-  type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
+  type?:
+    | "default"
+    | "title"
+    | "defaultSemiBold"
+    | "subtitle"
+    | "normalSubtitle";
 };
 
 export function ThemedText({
   style,
-  lightColor,
-  darkColor,
   type = "default",
   alignSelf,
   iconName,
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   const theme = useColorScheme() ?? "light";
 
   return (
     <View style={[styles.container, { alignSelf }]}>
       <Text
         style={[
-          { color },
+          { color: theme === "light" ? Colors.light.text : Colors.dark.text },
           type === "default" ? styles.default : undefined,
           type === "title" ? styles.title : undefined,
           type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
           type === "subtitle" ? styles.subtitle : undefined,
+          type === "normalSubtitle" ? styles.normalSubtitle : undefined,
           style,
         ]}
         {...rest}
@@ -42,7 +42,7 @@ export function ThemedText({
         <IconSymbol
           size={16}
           name={iconName}
-          color={theme === "light" ? Colors.light.icon : Colors.dark.icon}
+          color={theme === "light" ? Colors.light.text : Colors.dark.text}
         />
       ) : null}
     </View>
@@ -51,27 +51,25 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   container: {
-    gap: 4,
     flexDirection: "row",
     alignItems: "center",
   },
   default: {
     fontSize: 16,
-    lineHeight: 24,
   },
   defaultSemiBold: {
     fontSize: 16,
-    lineHeight: 24,
     fontWeight: "600",
   },
   title: {
-    fontSize: 24,
-    lineHeight: 24,
+    fontSize: 28,
     fontWeight: "bold",
   },
   subtitle: {
     fontSize: 20,
-    lineHeight: 24,
     fontWeight: "bold",
+  },
+  normalSubtitle: {
+    fontSize: 20,
   },
 });

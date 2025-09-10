@@ -1,11 +1,16 @@
 // Fallback for using MaterialIcons on Android and web.
 
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { SymbolViewProps, SymbolWeight } from 'expo-symbols';
-import { ComponentProps } from 'react';
-import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { SymbolWeight } from "expo-symbols";
+import { ComponentProps } from "react";
+import {
+  OpaqueColorValue,
+  type StyleProp,
+  type TextStyle
+} from "react-native";
 
-type IconMapping = Record<SymbolViewProps['name'], ComponentProps<typeof MaterialIcons>['name']>;
+type IconMapping = Record<string, ComponentProps<typeof MaterialIcons>["name"]>;
+
 export type IconSymbolName = keyof typeof MAPPING;
 
 /**
@@ -13,13 +18,21 @@ export type IconSymbolName = keyof typeof MAPPING;
  * - see Material Icons in the [Icons Directory](https://icons.expo.fyi).
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
-const MAPPING = {
-  'house.fill': 'home',
-  'paperplane.fill': 'send',
-  'chevron.left.forwardslash.chevron.right': 'code',
-  'chevron.right': 'chevron-right',
-  'newspaper.fill': 'newspaper'
-} as IconMapping;
+const MAPPING: Partial<IconMapping> = {
+  "house.fill": "home",
+  "paperplane.fill": "send",
+  "chevron.left.forwardslash.chevron.right": "code",
+  "chevron.right": "chevron-right",
+  "newspaper.fill": "newspaper",
+  // Iconos de los productos
+  star: "star-outline",
+  "line-chart": "stacked-line-chart",
+  "bar-chart": "stacked-bar-chart",
+  apartment: "apartment",
+  "area-chart": "area-chart",
+  "event-seat": "event-seat",
+  factory: "factory",
+};
 
 /**
  * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
@@ -38,5 +51,12 @@ export function IconSymbol({
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  return (
+    <MaterialIcons
+      size={size}
+      color={color}
+      style={style}
+      name={MAPPING[name]}
+    />
+  );
 }

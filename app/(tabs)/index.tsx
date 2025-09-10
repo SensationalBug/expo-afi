@@ -1,23 +1,27 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import Carousel from "@/components/Custom/Carousel";
+import { Collapsible } from "@/components/Custom/Collapsible";
 import CustomView from "@/components/Custom/CustomView";
 import ParallaxScrollView from "@/components/Custom/ParallaxScrollView";
 import { ThemedText } from "@/components/Themed/ThemedText";
-import { ThemedView } from "@/components/Themed/ThemedView";
 import { Image } from "expo-image";
+
+import { data } from "../../config";
 
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       header={
         <View style={styles.headerContainer}>
           <Image
-            source={require("@/assets/images/react-logo.png")}
             style={styles.headerImage}
+            source={require("@/assets/images/react-logo.png")}
           />
           <View style={{ height: "100%", justifyContent: "space-evenly" }}>
-            <ThemedText type="title">Pedro Luis De Leon Alejo</ThemedText>
+            <Text style={{ fontSize: 24, color: "white" }}>
+              Pedro Luis De Leon Alejo
+            </Text>
             <TouchableOpacity>
               <ThemedText alignSelf="flex-end" iconName="chevron.right">
                 Ver perfil
@@ -27,59 +31,101 @@ export default function HomeScreen() {
         </View>
       }
     >
-      <CustomView height={150}>
-        <ThemedText type="title" style={{ textAlign: "center" }}>
+      <CustomView padding>
+        <ThemedText type="subtitle" style={{ textAlign: "center" }}>
           Completa tu perfil
         </ThemedText>
         <TouchableOpacity>
           <ThemedText
-            type="subtitle"
             alignSelf="flex-end"
             iconName="chevron.right"
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", paddingVertical: 10 }}
           >
             0/7 completados
           </ThemedText>
         </TouchableOpacity>
-      </CustomView>
-
-      <CustomView height={100}>
-        <ThemedText type="title">Calculadora</ThemedText>
+        <ThemedText type="subtitle" style={{ textAlign: "center" }}>
+          Siguiente paso:
+        </ThemedText>
         <TouchableOpacity>
           <ThemedText
-            type="subtitle"
             alignSelf="flex-end"
             iconName="chevron.right"
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", paddingVertical: 10 }}
           >
-            Ir a la calculadora
+            Validacion Biometrica
           </ThemedText>
         </TouchableOpacity>
       </CustomView>
 
-      <ThemedView>
-        <ThemedText type="title">Fondos</ThemedText>
-      </ThemedView>
-
-      <CustomView height={200}>
-        <ThemedText type="title">Fondo 1</ThemedText>
+      <CustomView padding>
+        <Collapsible title="Calcula tus ingresos">
+          <ThemedText type="title">FAQ</ThemedText>
+          <ThemedText type="title">FAQ</ThemedText>
+          <ThemedText type="title">FAQ</ThemedText>
+          <ThemedText type="title">FAQ</ThemedText>
+          <ThemedText type="title">FAQ</ThemedText>
+          <ThemedText type="title">FAQ</ThemedText>
+        </Collapsible>
       </CustomView>
 
-      <CustomView height={200}>
-        <ThemedText type="title">Fondo 2</ThemedText>
-      </CustomView>
+      <ThemedText type="title">CArousel Lorem, ipsum dolor.</ThemedText>
 
-      <CustomView height={200}>
-        <ThemedText type="title">Fondo 3</ThemedText>
-      </CustomView>
+      <Carousel data={data}>
+        <TouchableOpacity>
+          <ThemedText
+            style={{ padding: 10, alignSelf: "flex-end" }}
+            iconName="chevron.right"
+          >
+            Ver mas
+          </ThemedText>
+        </TouchableOpacity>
+      </Carousel>
 
-      <ThemedView>
-        <ThemedText alignSelf="flex-end">Ver mas...</ThemedText>
-      </ThemedView>
-
-      <ThemedView>
-        <ThemedText type="title">FAQ</ThemedText>
-      </ThemedView>
+      <ThemedText type="title" style={{ marginTop: 50 }}>
+        FAQ
+      </ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
+      <ThemedText type="title">FAQ</ThemedText>
     </ParallaxScrollView>
   );
 }
@@ -95,5 +141,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginHorizontal: 7,
     backgroundColor: "red",
+  },
+  moreButton: {
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: "flex-end",
+    backgroundColor: "#1D3D47",
   },
 });
