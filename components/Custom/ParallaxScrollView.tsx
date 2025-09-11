@@ -1,4 +1,9 @@
-import type { PropsWithChildren, ReactElement } from "react";
+import {
+  PropsWithChildren,
+  ReactElement,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { StyleSheet } from "react-native";
 import Animated, {
   interpolate,
@@ -18,63 +23,86 @@ type Props = PropsWithChildren<{
   headerBackgroundColor?: { dark: string; light: string };
 }>;
 
-export default function ParallaxScrollView({
-  children,
-  header,
-  headerBackgroundColor = 'red' as any,
-}: Props) {
-  const colorScheme = useColorScheme() ?? "light";
-  const scrollRef = useAnimatedRef<Animated.ScrollView>();
-  const scrollOffset = useScrollViewOffset(scrollRef);
-  const bottom = useBottomTabOverflow();
-  const headerAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateY: interpolate(
-            scrollOffset.value,
-            [-HEADER_HEIGHT, 0, HEADER_HEIGHT],
-            [-HEADER_HEIGHT / 2, 0, HEADER_HEIGHT * -0.75]
-          ),
-        },
-        {
-          scale: interpolate(
-            scrollOffset.value,
-            [-HEADER_HEIGHT, 0, HEADER_HEIGHT],
-            [2, 1, 1]
-          ),
-        },
-      ],
-    };
-  });
+const ParallaxScrollView = forwardRef<Animated.ScrollView, Props>(
+  ({ children, header, headerBackgroundColor = "red" as any }, ref) => {
+    const colorScheme = useColorScheme() ?? "light";
+    const scrollRef = useAnimatedRef<Animated.ScrollView>();
+    const scrollOffset = useScrollViewOffset(scrollRef);
+    const bottom = useBottomTabOverflow();
 
-  return (
-    <ThemedView style={styles.container}>
-      <Animated.ScrollView
-        ref={scrollRef}
-        scrollEventThrottle={16}
-        scrollIndicatorInsets={{ bottom }}
-        contentContainerStyle={{ paddingBottom: bottom }}
-      >
-        <Animated.View
-          style={[
-            styles.header,
-            { backgroundColor: headerBackgroundColor[colorScheme] },
-            headerAnimatedStyle,
-          ]}
+    // Exponer métodos del scroll interno
+    useImperativeHandle(
+      ref,
+      () =>
+        ({
+          scrollTo: (options: {
+            x?: number;
+            y?: number;
+            animated?: boolean;
+          }) => {
+            scrollRef.current?.scrollTo(options);
+          },
+          scrollToEnd: (options?: { animated?: boolean }) => {
+            scrollRef.current?.scrollToEnd(options);
+          },
+          getScrollResponder: () => scrollRef.current?.getScrollResponder?.(),
+        } as any)
+    );
+
+    const headerAnimatedStyle = useAnimatedStyle(() => {
+      return {
+        transform: [
+          {
+            translateY: interpolate(
+              scrollOffset.value,
+              [-HEADER_HEIGHT, 0, HEADER_HEIGHT],
+              [-HEADER_HEIGHT / 2, 0, HEADER_HEIGHT * -0.75]
+            ),
+          },
+          {
+            scale: interpolate(
+              scrollOffset.value,
+              [-HEADER_HEIGHT, 0, HEADER_HEIGHT],
+              [2, 1, 1]
+            ),
+          },
+        ],
+      };
+    });
+
+    return (
+      <ThemedView style={styles.container}>
+        <Animated.ScrollView
+          ref={scrollRef}
+          scrollEventThrottle={16}
+          scrollIndicatorInsets={{ bottom }}
+          contentContainerStyle={{ paddingBottom: bottom }}
         >
-          {header}
-        </Animated.View>
-        <ThemedView style={styles.content}>{children}</ThemedView>
-      </Animated.ScrollView>
-    </ThemedView>
-  );
-}
+          <Animated.View
+            style={[
+              styles.header,
+              { backgroundColor: headerBackgroundColor[colorScheme] },
+              headerAnimatedStyle,
+            ]}
+          >
+            {header}
+          </Animated.View>
+          <ThemedView style={styles.content}>{children}</ThemedView>
+        </Animated.ScrollView>
+      </ThemedView>
+    );
+  }
+);
+
+// Agregar displayName para mejor debugging
+ParallaxScrollView.displayName = "ParallaxScrollView";
+
+export default ParallaxScrollView;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'red'
+    backgroundColor: "red",
   },
   header: {
     overflow: "hidden",

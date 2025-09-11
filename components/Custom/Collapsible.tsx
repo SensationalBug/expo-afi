@@ -10,9 +10,9 @@ export function Collapsible({
   children,
   title,
 }: PropsWithChildren & { title: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [contentHeight, setContentHeight] = useState(0);
   const theme = useColorScheme() ?? "light";
+  const [isOpen, setIsOpen] = useState(true);
+  const [contentHeight, setContentHeight] = useState(0);
 
   // Referencias para las animaciones
   const rotateAnimation = useRef(new Animated.Value(0)).current;
@@ -35,7 +35,7 @@ export function Collapsible({
         }),
         Animated.timing(heightAnimation, {
           toValue: targetHeight,
-          duration: 350,
+          duration: 300,
           useNativeDriver: false,
         }),
         Animated.timing(opacityAnimation, {
@@ -53,7 +53,7 @@ export function Collapsible({
           useNativeDriver: false,
         }),
         Animated.timing(heightAnimation, {
-          toValue: 40,
+          toValue: 0,
           duration: 250,
           useNativeDriver: false,
         }),
@@ -64,7 +64,13 @@ export function Collapsible({
         }),
       ]).start();
     }
-  }, [isOpen, contentHeight]);
+  }, [
+    isOpen,
+    contentHeight,
+    rotateAnimation,
+    heightAnimation,
+    opacityAnimation,
+  ]);
 
   // Interpolaciones
   const rotateInterpolate = rotateAnimation.interpolate({
@@ -82,9 +88,9 @@ export function Collapsible({
   return (
     <View>
       <TouchableOpacity
+        activeOpacity={0.6}
         style={styles.heading}
         onPress={toggleCollapsible}
-        activeOpacity={0.6}
       >
         <ThemedText type="title">{title}</ThemedText>
         <Animated.View
@@ -93,9 +99,9 @@ export function Collapsible({
           }}
         >
           <IconSymbol
-            name="chevron.right"
             size={30}
             weight="medium"
+            name="chevron.right"
             color={theme === "light" ? Colors.light.text : Colors.dark.text}
           />
         </Animated.View>
@@ -129,23 +135,22 @@ export function Collapsible({
 
 const styles = StyleSheet.create({
   heading: {
+    gap: 6,
+    height: 40,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // Distribuye el título y el ícono
-    height: 40, // Altura fija para el header
-    paddingHorizontal: 16, // Padding horizontal
-    gap: 6,
+    paddingHorizontal: 10,
+    justifyContent: "space-between",
   },
   animatedContainer: {
     overflow: "hidden",
   },
   content: {
     marginTop: 6,
-    marginLeft: 24,
   },
   hiddenContent: {
-    position: "absolute",
-    opacity: 0,
     zIndex: -1,
+    opacity: 0,
+    position: "absolute",
   },
 });

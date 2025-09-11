@@ -7,11 +7,21 @@ import ParallaxScrollView from "@/components/Custom/ParallaxScrollView";
 import { ThemedText } from "@/components/Themed/ThemedText";
 import { Image } from "expo-image";
 
+import Calculator from "@/components/Views/Calculator";
+import React from "react";
+import Animated from "react-native-reanimated";
 import { data } from "../../config";
 
 export default function HomeScreen() {
+  const scrollRef = React.useRef<Animated.ScrollView>(null);
+
+  const scrollToTop = () => {
+    scrollRef.current?.scrollTo({ y: 430, animated: true });
+  };
+
   return (
     <ParallaxScrollView
+      ref={scrollRef}
       header={
         <View style={styles.headerContainer}>
           <Image
@@ -60,12 +70,7 @@ export default function HomeScreen() {
 
       <CustomView padding>
         <Collapsible title="Calcula tus ingresos">
-          <ThemedText type="title">FAQ</ThemedText>
-          <ThemedText type="title">FAQ</ThemedText>
-          <ThemedText type="title">FAQ</ThemedText>
-          <ThemedText type="title">FAQ</ThemedText>
-          <ThemedText type="title">FAQ</ThemedText>
-          <ThemedText type="title">FAQ</ThemedText>
+          <Calculator scrollToTop={scrollToTop} />
         </Collapsible>
       </CustomView>
 

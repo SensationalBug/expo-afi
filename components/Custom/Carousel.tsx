@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Animated, {
   interpolate,
+  SharedValue,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -71,7 +72,7 @@ function Item({
   children,
 }: {
   index: number;
-  scrollY: Animated.SharedValue<number>;
+  scrollY: SharedValue<number>;
   title: string;
   subtitle: string;
   icon: IconSymbolName;
@@ -98,7 +99,7 @@ function Item({
     <Animated.View style={[styles.item, itemScaleStyle]}>
       <CustomView style={styles.item}>
         <View
-          style={{ flexDirection: "row", alignItems: "center", padding: 10 }}
+          style={{ flexDirection: "row", alignItems: "flex-end", padding: 10 }}
         >
           <Text
             style={[
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     width: "60%",
-    fontSize: 28,
+    fontSize: 26,
     color: "white",
     fontWeight: "bold",
   },
