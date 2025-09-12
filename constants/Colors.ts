@@ -1,38 +1,23 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-const tintColorLight = "#0a7ea4";
-const tintColorDark = "#fff";
+const accentColor = "#4285F4"; // Azul vibrante como color principal
 
 export const Colors = {
-  light: {
-    text: "#11181C",
-    background: '#FFFFFF',
-    gradient: ["#FFFFFF", "#ADD8E6"],
-    tint: tintColorLight,
-    icon: "#687076",
-    tabIconDefault: "#687076",
-    tabIconSelected: tintColorLight,
-    cardBackground: "#cbc8c8ff",
-    border: "#E2E2E2",
-    buttonBackground: tintColorLight,
-    buttonText: "#FFFFFF",
-    mutedText: "#9BA1A6",
-  },
-  dark: {
-    text: "#ECEDEE",
-    background: '#151718',
-    gradient: ["#000000", "#00008B"],
-    tint: tintColorDark,
-    icon: "#9BA1A6",
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
-    cardBackground: "#2c3239ff",
-    border: "#2A2C2E",
-    buttonBackground: tintColorDark,
-    buttonText: "#FFFFFF",
-    mutedText: "#7D8286",
+  default: {
+    text: "#030400", // Negro para texto
+    background: "#f9f9f9", // Blanco para fondo principal
+    gradient: ["#f9f9f9", "#f1f1f1"] as const, // Blanco + gris claro
+    tint: accentColor, // ✅ Azul para elementos seleccionados
+    icon: accentColor, // ✅ Azul para iconos
+    tabIconDefault: "#030400", // Negro para iconos inactivos
+    tabIconSelected: accentColor, // ✅ Azul para iconos seleccionados
+    cardBackground: "#f1f1f1", // Gris muy claro para tarjetas
+    border: "#f1f1f1", // Gris claro para bordes
+    buttonBackground: accentColor, // ✅ Azul para fondo de botones
+    buttonText: "#f9f9f9", // Blanco para texto de botones
+    mutedText: "#03040080", // Negro con transparencia para texto secundario
+
+    // Estados adicionales
+    selected: accentColor, // ✅ Azul para elementos seleccionados
+    active: accentColor, // ✅ Azul para estado activo
+    accent: accentColor, // ✅ Azul para acentos
   },
 };

@@ -1,10 +1,10 @@
 import { formatNumber } from "@/utils/formatCurrency";
 import React from "react";
 import { StyleProp, TextStyle, View } from "react-native";
-import CustomButton from "../Custom/CustomButton";
-import CustomInput from "../Custom/CustomInput";
-import Slider from "../Custom/Slider";
-import { ThemedText } from "../Themed/ThemedText";
+import { ThemedText } from "../themed/ThemedText";
+import CustomButton from "./CustomButton";
+import CustomInput from "./CustomInput";
+import Slider from "./Slider";
 
 type CustomTextProps = {
   text: string;

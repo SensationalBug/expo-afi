@@ -1,14 +1,14 @@
 import React, { useCallback, useRef, useState } from "react";
 import {
-  Animated,
-  GestureResponderEvent,
-  PanResponder,
-  PanResponderGestureState,
-  StyleSheet,
-  Text,
-  View,
+    Animated,
+    GestureResponderEvent,
+    PanResponder,
+    PanResponderGestureState,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
-import { ThemedText } from "../Themed/ThemedText";
+import { ThemedText } from "../themed/ThemedText";
 
 interface SliderProps {
   onValueChange?: (days: number) => void;

@@ -1,37 +1,46 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import Carousel from "@/components/Custom/Carousel";
-import { Collapsible } from "@/components/Custom/Collapsible";
-import CustomView from "@/components/Custom/CustomView";
-import ParallaxScrollView from "@/components/Custom/ParallaxScrollView";
-import { ThemedText } from "@/components/Themed/ThemedText";
+import Carousel from "@/components/custom/Carousel";
+import { Collapsible } from "@/components/custom/Collapsible";
+import CustomView from "@/components/custom/CustomView";
+import ParallaxScrollView from "@/components/custom/ParallaxScrollView";
+import { ThemedText } from "@/components/themed/ThemedText";
 import { Image } from "expo-image";
 
-import Calculator from "@/components/Views/Calculator";
+import Calculator from "@/components/custom/Calculator";
+import CustomButton from "@/components/custom/CustomButton";
+import { Colors } from "@/constants/Colors";
 import React from "react";
 import Animated from "react-native-reanimated";
 import { data } from "../../config";
 
 export default function HomeScreen() {
   const scrollRef = React.useRef<Animated.ScrollView>(null);
-
   const scrollToTop = () => {
-    scrollRef.current?.scrollTo({ y: 430, animated: true });
+    scrollRef.current?.scrollTo({ y: 360, animated: true });
   };
 
   return (
     <ParallaxScrollView
       ref={scrollRef}
       header={
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer]}>
           <Image
             style={styles.headerImage}
             source={require("@/assets/images/react-logo.png")}
           />
-          <View style={{ height: "100%", justifyContent: "space-evenly" }}>
-            <Text style={{ fontSize: 24, color: "white" }}>
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              paddingRight: 15,
+              alignItems: "flex-end",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <ThemedText type="title" style={{ fontSize: 24 }}>
               Pedro Luis De Leon Alejo
-            </Text>
+            </ThemedText>
             <TouchableOpacity>
               <ThemedText alignSelf="flex-end" iconName="chevron.right">
                 Ver perfil
@@ -42,30 +51,50 @@ export default function HomeScreen() {
       }
     >
       <CustomView padding>
-        <ThemedText type="subtitle" style={{ textAlign: "center" }}>
-          Completa tu perfil
-        </ThemedText>
-        <TouchableOpacity>
-          <ThemedText
-            alignSelf="flex-end"
-            iconName="chevron.right"
-            style={{ textAlign: "center", paddingVertical: 10 }}
-          >
-            0/7 completados
-          </ThemedText>
-        </TouchableOpacity>
-        <ThemedText type="subtitle" style={{ textAlign: "center" }}>
-          Siguiente paso:
-        </ThemedText>
-        <TouchableOpacity>
-          <ThemedText
-            alignSelf="flex-end"
-            iconName="chevron.right"
-            style={{ textAlign: "center", paddingVertical: 10 }}
-          >
-            Validacion Biometrica
-          </ThemedText>
-        </TouchableOpacity>
+        <Collapsible title="Completa tu perfil" subtitle="Completados 0/7">
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            textType="normalSubtitle"
+            title="Validacion biometrica"
+          />
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            textType="normalSubtitle"
+            title="Datos personales"
+          />
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            textType="normalSubtitle"
+            title="Datos laborales"
+          />
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            textType="normalSubtitle"
+            title="Perfil de inversionista"
+          />
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            title="Boton 5"
+            textType="normalSubtitle"
+          />
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            title="Boton 6"
+            textType="normalSubtitle"
+          />
+          <CustomButton
+            bgColor={Colors.default.cardBackground}
+            icons
+            title="Boton 7"
+            textType="normalSubtitle"
+          />
+        </Collapsible>
       </CustomView>
 
       <CustomView padding>
@@ -141,16 +170,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerImage: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     borderRadius: 100,
     marginHorizontal: 7,
-    backgroundColor: "red",
-  },
-  moreButton: {
-    padding: 10,
-    borderRadius: 10,
-    alignSelf: "flex-end",
-    backgroundColor: "#1D3D47",
+    position: "absolute",
+    left: -70,
+    top: -70,
   },
 });

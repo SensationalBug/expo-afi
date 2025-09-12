@@ -14,7 +14,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-import { ThemedText } from "../Themed/ThemedText";
+import { ThemedText } from "../themed/ThemedText";
 import { IconSymbol, IconSymbolName } from "../ui/IconSymbol";
 import CustomView from "./CustomView";
 
@@ -105,7 +105,7 @@ function Item({
             style={[
               styles.itemTitle,
               {
-                color: theme === "light" ? Colors.light.text : Colors.dark.text,
+                color: Colors.default.text,
               },
             ]}
           >

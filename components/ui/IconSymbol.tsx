@@ -3,11 +3,7 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SymbolWeight } from "expo-symbols";
 import { ComponentProps } from "react";
-import {
-  OpaqueColorValue,
-  type StyleProp,
-  type TextStyle
-} from "react-native";
+import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 
 type IconMapping = Record<string, ComponentProps<typeof MaterialIcons>["name"]>;
 
@@ -32,6 +28,11 @@ const MAPPING: Partial<IconMapping> = {
   "area-chart": "area-chart",
   "event-seat": "event-seat",
   factory: "factory",
+  // iconos varios
+  gear: "settings",
+  bell: "notifications-none",
+  check: "check",
+  "circle.unchecked": "radio-button-unchecked",
 };
 
 /**

@@ -1,9 +1,9 @@
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
-import ParallaxScrollView from '@/components/Custom/ParallaxScrollView';
-import { ThemedText } from '@/components/Themed/ThemedText';
-import { ThemedView } from '@/components/Themed/ThemedView';
+import ParallaxScrollView from '@/components/custom/ParallaxScrollView';
+import { ThemedText } from '@/components/themed/ThemedText';
+import { ThemedView } from '@/components/themed/ThemedView';
 
 export default function NewsScreen() {
   return (

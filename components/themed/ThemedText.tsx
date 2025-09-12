@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, type TextProps } from "react-native";
 
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme.web";
 import { IconSymbol, IconSymbolName } from "../ui/IconSymbol";
 
 export type ThemedTextProps = TextProps & {
@@ -22,13 +21,11 @@ export function ThemedText({
   iconName,
   ...rest
 }: ThemedTextProps) {
-  const theme = useColorScheme() ?? "light";
-
   return (
     <View style={[styles.container, { alignSelf }]}>
       <Text
         style={[
-          { color: theme === "light" ? Colors.light.text : Colors.dark.text },
+          { color: Colors.default.text },
           type === "default" ? styles.default : undefined,
           type === "title" ? styles.title : undefined,
           type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
@@ -39,11 +36,7 @@ export function ThemedText({
         {...rest}
       />
       {iconName ? (
-        <IconSymbol
-          size={16}
-          name={iconName}
-          color={theme === "light" ? Colors.light.text : Colors.dark.text}
-        />
+        <IconSymbol size={16} name={iconName} color={Colors.default.text} />
       ) : null}
     </View>
   );
