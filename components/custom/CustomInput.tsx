@@ -1,4 +1,5 @@
 // CustomInput.tsx
+import { Colors } from "@/constants/Colors";
 import React, { useRef } from "react";
 import { StyleSheet, TextInput } from "react-native";
 
@@ -27,11 +28,11 @@ const CustomInput = ({
     <TextInput
       ref={inputRef}
       style={styles.input}
+      onFocus={handleFocus}
       keyboardType="numeric"
       placeholder={placeholder}
       onChangeText={onChangeText}
-      placeholderTextColor="gray"
-      onFocus={handleFocus}
+      placeholderTextColor={Colors.default.mutedText}
     />
   );
 };
@@ -40,13 +41,13 @@ export default CustomInput;
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: "white",
+    borderColor: Colors.default.mutedText,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
     minHeight: 50,
     fontSize: 16,
     width: "95%",
-    color: "white",
+    color: Colors.default.text,
   },
 });

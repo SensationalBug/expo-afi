@@ -11,6 +11,7 @@ import { IconSymbol } from "../ui/IconSymbol";
 
 type CustomButtonProps = {
   title: string;
+  titleColor?: string;
   onPress?: () => void;
   width?: DimensionValue;
   height?: DimensionValue;
@@ -27,6 +28,7 @@ type CustomButtonProps = {
 
 const CustomButton = ({
   title,
+  titleColor = Colors.default.text,
   onPress,
   width,
   height,
@@ -44,8 +46,8 @@ const CustomButton = ({
           width,
           height,
           opacity: disabled ? 0.6 : 1,
-          backgroundColor: bgColor || Colors.default.buttonBackground,
           justifyContent: icons ? "space-between" : "center",
+          backgroundColor: bgColor || Colors.default.buttonBackground,
         },
       ]}
       onPress={onPress}
@@ -61,7 +63,7 @@ const CustomButton = ({
           <View
             style={[
               styles.leftIcon,
-              { backgroundColor: Colors.default.mutedText },
+              { backgroundColor: Colors.default.lightGray },
             ]}
           >
             <IconSymbol
@@ -69,13 +71,19 @@ const CustomButton = ({
               name="circle.unchecked"
               color={Colors.default.icon}
             />
+            {/* <IconSymbol name="check" color={Colors.default.icon} /> */}
           </View>
         )}
-        {/* <IconSymbol name="check" color={"red"} /> */}
-        <ThemedText type={textType}>{title}</ThemedText>
+        <ThemedText type={textType} style={{ color: titleColor }}>
+          {title}
+        </ThemedText>
       </View>
       {icons && (
-        <IconSymbol size={16} name="chevron.right" color={"#ffffffb2"} />
+        <IconSymbol
+          size={16}
+          name="chevron.right"
+          color={Colors.default.icon}
+        />
       )}
     </TouchableOpacity>
   );
@@ -86,13 +94,16 @@ export default CustomButton;
 const styles = StyleSheet.create({
   button: {
     gap: 10,
+    margin:10,
     padding: 10,
-    marginTop: 10,
-    minHeight: 50,
-    minWidth: 100,
+    minWidth: 80,
+    elevation: 5,
+    minHeight: 40,
     borderRadius: 10,
     alignItems: "center",
     flexDirection: "row",
+    boxShadow:Colors.default.boxShadow,
+    shadowColor: Colors.default.mutedText,
   },
   leftIcon: {
     width: 40,
@@ -101,6 +112,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#d6d6d663",
   },
 });

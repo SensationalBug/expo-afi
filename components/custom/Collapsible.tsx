@@ -1,7 +1,6 @@
 import { ThemedText } from "@/components/themed/ThemedText";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
 
@@ -9,8 +8,12 @@ export function Collapsible({
   children,
   title,
   subtitle,
-}: PropsWithChildren & { title: string; subtitle?: string }) {
-  const theme = useColorScheme() ?? "light";
+  type = "title",
+}: PropsWithChildren & {
+  title: string;
+  subtitle?: string;
+  type?: "title" | "default" | "subtitle" | "normalSubtitle";
+}) {
   const [isOpen, setIsOpen] = useState(true);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -42,10 +45,10 @@ export function Collapsible({
     extrapolate: "clamp",
   });
 
-  const opacity = animationValue.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [0, 0.5, 1],
-  });
+  // const opacity = animationValue.interpolate({
+  //   inputRange: [0, 0.5, 1],
+  //   outputRange: [0, 0.5, 1],
+  // });
 
   const rotateInterpolate = rotateAnimation.interpolate({
     inputRange: [0, 1],
@@ -60,9 +63,9 @@ export function Collapsible({
   };
 
   return (
-    <View>
+    <View style={{ padding: 5 }}>
       <TouchableOpacity
-        activeOpacity={0.6}
+        activeOpacity={0.5}
         style={styles.heading}
         onPress={toggleCollapsible}
       >
@@ -73,7 +76,7 @@ export function Collapsible({
             justifyContent: "space-between",
           }}
         >
-          <ThemedText type="title">{title}</ThemedText>
+          <ThemedText type={type}>{title}</ThemedText>
           <Animated.View
             style={{
               transform: [{ rotate: rotateInterpolate }],
@@ -102,7 +105,8 @@ export function Collapsible({
           styles.animatedContainer,
           {
             maxHeight: maxHeight,
-            opacity: opacity,
+            // opacity: opacity,
+            paddingVertical: isOpen ? 5 : 0,
           },
         ]}
       >
@@ -133,6 +137,7 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 6,
+    overflow: "hidden",
   },
   hiddenContent: {
     zIndex: -1,

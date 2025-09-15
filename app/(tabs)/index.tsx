@@ -17,7 +17,7 @@ import { data } from "../../config";
 export default function HomeScreen() {
   const scrollRef = React.useRef<Animated.ScrollView>(null);
   const scrollToTop = () => {
-    scrollRef.current?.scrollTo({ y: 360, animated: true });
+    // scrollRef.current?.scrollTo({ y: 400, animated: true });
   };
 
   return (
@@ -53,46 +53,46 @@ export default function HomeScreen() {
       <CustomView padding>
         <Collapsible title="Completa tu perfil" subtitle="Completados 0/7">
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             textType="normalSubtitle"
             title="Validacion biometrica"
+            bgColor={Colors.default.background}
           />
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             textType="normalSubtitle"
             title="Datos personales"
+            bgColor={Colors.default.background}
           />
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             textType="normalSubtitle"
             title="Datos laborales"
+            bgColor={Colors.default.background}
           />
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             textType="normalSubtitle"
             title="Perfil de inversionista"
+            bgColor={Colors.default.background}
           />
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             title="Boton 5"
             textType="normalSubtitle"
+            bgColor={Colors.default.background}
           />
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             title="Boton 6"
             textType="normalSubtitle"
+            bgColor={Colors.default.background}
           />
           <CustomButton
-            bgColor={Colors.default.cardBackground}
             icons
             title="Boton 7"
             textType="normalSubtitle"
+            bgColor={Colors.default.background}
           />
         </Collapsible>
       </CustomView>
@@ -103,7 +103,9 @@ export default function HomeScreen() {
         </Collapsible>
       </CustomView>
 
-      <ThemedText type="title">CArousel Lorem, ipsum dolor.</ThemedText>
+      <View style={{ paddingVertical: 10, paddingHorizontal: 15 }}>
+        <ThemedText type="title">Carousel Lorem, ipsum dolor.</ThemedText>
+      </View>
 
       <Carousel data={data}>
         <TouchableOpacity>
@@ -116,50 +118,119 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </Carousel>
 
-      <ThemedText type="title" style={{ marginTop: 50 }}>
-        FAQ
-      </ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
-      <ThemedText type="title">FAQ</ThemedText>
+      <View style={{ paddingVertical: 10, paddingHorizontal: 15 }}>
+        <ThemedText type="title">FAQ</ThemedText>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+        <Collapsible
+          type="subtitle"
+          title="¿Qué riesgo tienen las inversiones?"
+        >
+          <ThemedText style={{ textAlign: "justify" }}>
+            Las inversiones conllevan diferentes niveles de riesgo. Los fondos
+            de renta fija son más conservadores, mientras que las acciones
+            tienen mayor volatilidad pero también mayor potencial de crecimiento
+            a largo plazo.
+          </ThemedText>
+        </Collapsible>
+      </View>
     </ParallaxScrollView>
   );
 }

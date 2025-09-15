@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/Colors";
 import { formatNumber } from "@/utils/formatCurrency";
 import React from "react";
 import { StyleProp, TextStyle, View } from "react-native";
@@ -13,6 +14,10 @@ type CustomTextProps = {
   alignSelf?: "flex-start" | "center" | "flex-end";
 };
 
+type CalculatorProps = {
+  scrollToTop: () => void;
+};
+
 const CustomText = ({ text, fontSize, alignSelf, style }: CustomTextProps) => {
   return (
     <ThemedText
@@ -24,6 +29,7 @@ const CustomText = ({ text, fontSize, alignSelf, style }: CustomTextProps) => {
           padding: 5,
           marginVertical: 5,
           textAlign: "justify",
+          color: Colors.default.text,
           lineHeight: fontSize ? fontSize + 6 : 22,
         },
       ]}
@@ -33,7 +39,7 @@ const CustomText = ({ text, fontSize, alignSelf, style }: CustomTextProps) => {
   );
 };
 
-const Calculator = ({ scrollToTop }: { scrollToTop?: () => void }) => {
+const Calculator = ({ scrollToTop }: CalculatorProps) => {
   const [selectedCurrency, setSelectedCurrency] = React.useState("DOP");
   const [earningsData, setEarningsData] = React.useState({
     days: 30,
@@ -89,16 +95,19 @@ const Calculator = ({ scrollToTop }: { scrollToTop?: () => void }) => {
       >
         <CustomButton
           title="DOP"
+          titleColor={Colors.default.whiteText}
           disabled={selectedCurrency === "DOP"}
           onPress={() => setSelectedCurrency("DOP")}
         />
         <CustomButton
           title="USD"
+          titleColor={Colors.default.whiteText}
           disabled={selectedCurrency === "USD"}
           onPress={() => setSelectedCurrency("USD")}
         />
         <CustomButton
           title="EUR"
+          titleColor={Colors.default.whiteText}
           disabled={selectedCurrency === "EUR"}
           onPress={() => setSelectedCurrency("EUR")}
         />
@@ -106,12 +115,12 @@ const Calculator = ({ scrollToTop }: { scrollToTop?: () => void }) => {
       <View style={{ alignItems: "center" }}>
         <CustomText
           alignSelf="flex-start"
-          text={`Moneda seleccionada: ${selectedCurrency}`}
+          text={"Introduce el monto a invertir"}
         />
         <CustomInput
-          placeholder={`${selectedCurrency}$${1}`}
+          placeholder={`${selectedCurrency}$1000`}
           onChangeText={handleInputValue}
-          scrollToTop={scrollToTop} 
+          scrollToTop={scrollToTop}
         />
         <CustomText
           text="El monto minimo para depositos es de RD$1,000.00 o su equivalente en
@@ -146,7 +155,11 @@ const Calculator = ({ scrollToTop }: { scrollToTop?: () => void }) => {
           <CustomText
             fontSize={16}
             text={selectedCurrency}
-            style={{ backgroundColor: "#007AFF", borderRadius: 5 }}
+            style={{
+              borderRadius: 10,
+              marginHorizontal: 10,
+              backgroundColor: Colors.default.accent,
+            }}
           />
         </View>
       </View>

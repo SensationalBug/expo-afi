@@ -14,6 +14,7 @@ import Animated, {
 
 import { ThemedView } from "@/components/themed/ThemedView";
 import { useBottomTabOverflow } from "@/components/ui/TabBarBackground";
+import { Colors } from "@/constants/Colors";
 
 const HEADER_HEIGHT = 140;
 
@@ -69,7 +70,8 @@ const ParallaxScrollView = forwardRef<Animated.ScrollView, Props>(
     });
 
     return (
-      <ThemedView useGradient style={styles.container}>
+      <ThemedView style={styles.container}>
+      {/* <ThemedView useGradient style={styles.container}> */}
         <Animated.ScrollView
           ref={scrollRef}
           scrollEventThrottle={16}
@@ -96,16 +98,17 @@ export default ParallaxScrollView;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:Colors.default.background
   },
   header: {
     overflow: "hidden",
     height: HEADER_HEIGHT,
     justifyContent: "center",
   },
-  content: {
-    flex: 1,
-    gap: 16,
-    padding: 20,
-    overflow: "hidden",
-  },
+  // content: {
+  //   flex: 1,
+  //   gap: 16,
+  //   padding: 20,
+  //   overflow: "hidden",
+  // },
 });

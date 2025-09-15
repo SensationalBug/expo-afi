@@ -1,12 +1,6 @@
 import { Colors } from "@/constants/Colors";
 import React, { ReactNode } from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Animated, {
   interpolate,
   SharedValue,
@@ -20,10 +14,9 @@ import CustomView from "./CustomView";
 
 const { width } = Dimensions.get("screen");
 
-const parentPadding = 20;
-const availableWidth = width - parentPadding * 2;
-const itemWidth = availableWidth * 0.8;
-const spacing = (availableWidth - itemWidth) / 2;
+const itemWidth = width * 0.8;
+const spacing = (width - itemWidth) / 2 - 12;
+const endSpacing = spacing + 24;
 
 type CarouselProps<T> = {
   data: T[];
@@ -54,7 +47,9 @@ export default function Carousel<T>({ data, children }: CarouselProps<T>) {
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={[{ paddingHorizontal: spacing }]}
+        contentContainerStyle={[
+          { paddingLeft: spacing, paddingRight: endSpacing },
+        ]}
         snapToInterval={itemWidth}
         onScroll={scrollHandler}
         decelerationRate="fast"
@@ -78,14 +73,13 @@ function Item({
   icon: IconSymbolName;
   children: ReactNode;
 }) {
-  const theme = useColorScheme() ?? "light";
   const itemScaleStyle = useAnimatedStyle(() => {
     const input = [
       (index - 1) * itemWidth,
       index * itemWidth,
       (index + 1) * itemWidth,
     ];
-    const output = [0.8, 1, 0.8];
+    const output = [0.9, 1, 0.9];
     const clamp = {
       extrapolateLeft: "clamp" as const,
       extrapolateRight: "clamp" as const,
@@ -114,7 +108,7 @@ function Item({
           <IconSymbol
             size={100}
             name={icon}
-            color={"white"}
+            color={Colors.default.icon}
             style={{ width: "40%" }}
           />
         </View>
@@ -136,7 +130,8 @@ const styles = StyleSheet.create({
   item: {
     width: itemWidth,
     borderRadius: 10,
-    height:itemWidth,
+    height: itemWidth,
+    marginBottom: 30,
     justifyContent: "space-between",
   },
   itemTitle: {

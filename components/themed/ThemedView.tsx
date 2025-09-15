@@ -53,7 +53,7 @@ export function ThemedView({
     <>
       <StatusBar
         barStyle="dark-content"
-        backgroundColor={Colors.default.background}
+        backgroundColor={"red"}
         translucent={false}
       />
       <View

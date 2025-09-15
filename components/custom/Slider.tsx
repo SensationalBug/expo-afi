@@ -1,12 +1,13 @@
+import { Colors } from "@/constants/Colors";
 import React, { useCallback, useRef, useState } from "react";
 import {
-    Animated,
-    GestureResponderEvent,
-    PanResponder,
-    PanResponderGestureState,
-    StyleSheet,
-    Text,
-    View,
+  Animated,
+  GestureResponderEvent,
+  PanResponder,
+  PanResponderGestureState,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { ThemedText } from "../themed/ThemedText";
 
@@ -38,8 +39,8 @@ const Slider: React.FC<SliderProps> = ({
   const sliderRange = width - thumbSize;
 
   // Color único para todos los elementos
-  const primaryColor = "#007AFF";
-  const inactiveColor = "#E5E5E7";
+  const primaryColor = Colors.default.tint;
+  const inactiveColor = Colors.default.lightGray;
 
   // Animated values
   const pan = useRef(new Animated.Value(0)).current;
@@ -251,7 +252,7 @@ const Slider: React.FC<SliderProps> = ({
                   styles.label,
                   {
                     left: position - 15,
-                    color: isSelected ? 'white' : "#424242ff",
+                    color: isSelected ? Colors.default.accent : Colors.default.text,
                     fontWeight: isSelected ? "bold" : "normal",
                   },
                 ]}
