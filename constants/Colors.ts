@@ -14,7 +14,7 @@ export const Colors = {
     border: "#f1f1f1", // Gris claro para bordes
     buttonBackground: accentColor, // ✅ Azul para fondo de botones
     buttonText: "#f9f9f9", // Blanco para texto de botones
-    mutedText: "#4f4f4fff", // Negro con transparencia para texto secundario
+    mutedText: "#9c9c9cb5", // Negro con transparencia para texto secundario
     lightGray: "#e1e0e063", // Gris claro
     boxShadow: "0 8px 6px rgba(0, 0, 0, 0.1)",
     

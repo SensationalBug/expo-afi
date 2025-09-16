@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, type TextProps } from "react-native";
+import { StyleSheet, Text, type TextProps } from "react-native";
 
 import { Colors } from "@/constants/Colors";
-import { IconSymbol, IconSymbolName } from "../ui/IconSymbol";
+import { IconSymbolName } from "../ui/IconSymbol";
 
 export type ThemedTextProps = TextProps & {
   iconName?: IconSymbolName;
@@ -22,31 +22,22 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   return (
-    <View style={[styles.container, { alignSelf }]}>
-      <Text
-        style={[
-          { color: Colors.default.text },
-          type === "default" ? styles.default : undefined,
-          type === "title" ? styles.title : undefined,
-          type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
-          type === "subtitle" ? styles.subtitle : undefined,
-          type === "normalSubtitle" ? styles.normalSubtitle : undefined,
-          style,
-        ]}
-        {...rest}
-      />
-      {iconName ? (
-        <IconSymbol size={16} name={iconName} color={Colors.default.text} />
-      ) : null}
-    </View>
+    <Text
+      style={[
+        { color: Colors.default.text, alignSelf },
+        type === "default" ? styles.default : undefined,
+        type === "title" ? styles.title : undefined,
+        type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
+        type === "subtitle" ? styles.subtitle : undefined,
+        type === "normalSubtitle" ? styles.normalSubtitle : undefined,
+        style,
+      ]}
+      {...rest}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
   default: {
     fontSize: 16,
   },

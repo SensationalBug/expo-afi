@@ -1,42 +1,15 @@
 import { Colors } from "@/constants/Colors";
 import { formatNumber } from "@/utils/formatCurrency";
 import React from "react";
-import { StyleProp, TextStyle, View } from "react-native";
-import { ThemedText } from "../themed/ThemedText";
+import { View } from "react-native";
 import CustomButton from "./CustomButton";
 import CustomInput from "./CustomInput";
+import CustomText from "./CustomText";
 import Slider from "./Slider";
 
-type CustomTextProps = {
-  text: string;
-  fontSize?: number;
-  style?: StyleProp<TextStyle>;
-  alignSelf?: "flex-start" | "center" | "flex-end";
-};
 
 type CalculatorProps = {
   scrollToTop: () => void;
-};
-
-const CustomText = ({ text, fontSize, alignSelf, style }: CustomTextProps) => {
-  return (
-    <ThemedText
-      alignSelf={alignSelf}
-      style={[
-        style,
-        {
-          fontSize,
-          padding: 5,
-          marginVertical: 5,
-          textAlign: "justify",
-          color: Colors.default.text,
-          lineHeight: fontSize ? fontSize + 6 : 22,
-        },
-      ]}
-    >
-      {text}
-    </ThemedText>
-  );
 };
 
 const Calculator = ({ scrollToTop }: CalculatorProps) => {

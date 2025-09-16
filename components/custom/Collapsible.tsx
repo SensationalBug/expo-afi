@@ -2,26 +2,43 @@ import { ThemedText } from "@/components/themed/ThemedText";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
-import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  StyleProp,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
 export function Collapsible({
   children,
   title,
   subtitle,
   type = "title",
+  style,
+  isOpen,
+  onToggle,
+  alignSelf = "flex-end",
 }: PropsWithChildren & {
   title: string;
   subtitle?: string;
   type?: "title" | "default" | "subtitle" | "normalSubtitle";
+  style?: StyleProp<ViewStyle>;
+  isOpen: boolean;
+  alignSelf?: "flex-start" | "center" | "flex-end";
+  onToggle?: () => void;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  // const [isOpen, setIsOpen] = useState(true);
   const [contentHeight, setContentHeight] = useState(0);
 
   const animationValue = useRef(new Animated.Value(0)).current;
   const rotateAnimation = useRef(new Animated.Value(0)).current;
 
   const toggleCollapsible = () => {
-    setIsOpen((value) => !value);
+    if (onToggle) {
+      onToggle();
+    }
   };
 
   useEffect(() => {
@@ -63,23 +80,28 @@ export function Collapsible({
   };
 
   return (
-    <View style={{ padding: 5 }}>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        style={styles.heading}
-        onPress={toggleCollapsible}
-      >
+    <View style={[{ padding: 5 }, style]}>
+      <TouchableOpacity activeOpacity={0.5} onPress={toggleCollapsible}>
         <View
           style={{
+            width: "100%",
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <ThemedText type={type}>{title}</ThemedText>
+          <ThemedText
+            type={type}
+            style={{
+              width: "90%",
+            }}
+          >
+            {title}
+          </ThemedText>
           <Animated.View
             style={{
               transform: [{ rotate: rotateInterpolate }],
+              width: "10%",
             }}
           >
             <IconSymbol
@@ -93,8 +115,11 @@ export function Collapsible({
       </TouchableOpacity>
       {subtitle && (
         <ThemedText
-          alignSelf="flex-end"
-          style={{ paddingHorizontal: 10, paddingTop: 15 }}
+          alignSelf={alignSelf}
+          style={{
+            width: "100%",
+            paddingTop: 15,
+          }}
         >
           {subtitle}
         </ThemedText>
@@ -128,10 +153,6 @@ export function Collapsible({
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    paddingHorizontal: 10,
-    justifyContent: "space-between",
-  },
   animatedContainer: {
     overflow: "hidden",
   },

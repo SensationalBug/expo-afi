@@ -1,18 +1,20 @@
 // CustomInput.tsx
 import { Colors } from "@/constants/Colors";
 import React, { useRef } from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleProp, StyleSheet, TextInput, TextStyle } from "react-native";
 
 type CustomInputProps = {
   placeholder?: string;
   onChangeText?: (value: string) => void;
   scrollToTop?: () => void;
+  style?: StyleProp<TextStyle>;
 };
 
 const CustomInput = ({
   placeholder,
   onChangeText,
   scrollToTop,
+  style,
 }: CustomInputProps) => {
   const inputRef = useRef<TextInput>(null);
 
@@ -27,7 +29,7 @@ const CustomInput = ({
   return (
     <TextInput
       ref={inputRef}
-      style={styles.input}
+      style={[styles.input, style]}
       onFocus={handleFocus}
       keyboardType="numeric"
       placeholder={placeholder}

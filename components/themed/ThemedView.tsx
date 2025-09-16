@@ -34,12 +34,7 @@ export function ThemedView({
   if (useGradient) {
     return (
       <>
-        {Platform.OS === "ios" && (
-          <StatusBar
-            barStyle="dark-content"
-            backgroundColor={Colors.default.background}
-          />
-        )}
+        {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <LinearGradient
           colors={Colors.default.gradient as any}
           style={[{ flex: 1, paddingTop }, style]}
@@ -51,11 +46,7 @@ export function ThemedView({
 
   return (
     <>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={"red"}
-        translucent={false}
-      />
+      <StatusBar barStyle="dark-content" translucent={false} />
       <View
         style={[{ flex: 1, backgroundColor, paddingTop }, style]}
         {...otherProps}

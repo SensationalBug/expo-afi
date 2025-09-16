@@ -1,6 +1,17 @@
+import CarouselDescription from "@/app/(views)/carousel/CarouselDescription";
+import CarouselFooter from "@/app/(views)/carousel/CarouselFooter";
+import CarouselTitle from "@/app/(views)/carousel/CarouselTitle";
 import { Colors } from "@/constants/Colors";
-import React, { ReactNode } from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {
+  Dimensions,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import Animated, {
   interpolate,
   SharedValue,
@@ -11,6 +22,7 @@ import Animated, {
 import { ThemedText } from "../themed/ThemedText";
 import { IconSymbol, IconSymbolName } from "../ui/IconSymbol";
 import CustomView from "./CustomView";
+import SlideWindow from "./SlideWindow";
 
 const { width } = Dimensions.get("screen");
 
@@ -20,10 +32,9 @@ const endSpacing = spacing + 24;
 
 type CarouselProps<T> = {
   data: T[];
-  children?: ReactNode;
 };
 
-export default function Carousel<T>({ data, children }: CarouselProps<T>) {
+export default function Carousel<T>({ data }: CarouselProps<T>) {
   const scrollY = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.x;
@@ -41,9 +52,9 @@ export default function Carousel<T>({ data, children }: CarouselProps<T>) {
             scrollY={scrollY}
             title={item.title}
             subtitle={item.subtitle}
-          >
-            {children}
-          </Item>
+            description={item.descripcion}
+            posiblesUsos={item.posiblesUsos}
+          />
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -64,15 +75,18 @@ function Item({
   title,
   subtitle,
   icon,
-  children,
+  description,
+  posiblesUsos,
 }: {
   index: number;
   scrollY: SharedValue<number>;
   title: string;
   subtitle: string;
   icon: IconSymbolName;
-  children: ReactNode;
+  description: string;
+  posiblesUsos: string[];
 }) {
+  const [modalVisible, setModalVisible] = React.useState(false);
   const itemScaleStyle = useAnimatedStyle(() => {
     const input = [
       (index - 1) * itemWidth,
@@ -117,13 +131,49 @@ function Item({
             {subtitle}
           </ThemedText>
         </View>
-        {children}
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <ThemedText style={{ padding: 10 }} alignSelf="flex-end">
+            Ver mas {">"}
+          </ThemedText>
+        </TouchableOpacity>
       </CustomView>
+      <Modal
+        transparent
+        visible={modalVisible}
+        animationType="slide"
+        presentationStyle="fullScreen"
+        onRequestClose={() => setModalVisible(false)}
+        style={{ backgroundColor: "red" }}
+      >
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.topArea} />
+        </TouchableWithoutFeedback>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <SlideWindow onClose={() => setModalVisible(false)}>
+              <CarouselTitle title={title} subtitle={subtitle} icon={icon} />
+              <CarouselDescription content={description} />
+              <CarouselFooter content={posiblesUsos}/>
+            </SlideWindow>
+          </View>
+        </View>
+      </Modal>
     </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  topArea: {
+    height: "30%",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    height: "100%",
+  },
   flex: {
     flex: 1,
   },

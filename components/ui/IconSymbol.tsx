@@ -17,7 +17,7 @@ export type IconSymbolName = keyof typeof MAPPING;
 const MAPPING: Partial<IconMapping> = {
   "house.fill": "home",
   "paperplane.fill": "send",
-  "chevron.left.forwardslash.chevron.right": "code",
+  "chevron.left": "chevron-left",
   "chevron.right": "chevron-right",
   "newspaper.fill": "newspaper",
   // Iconos de los productos
@@ -33,6 +33,7 @@ const MAPPING: Partial<IconMapping> = {
   bell: "notifications-none",
   check: "check",
   "circle.unchecked": "radio-button-unchecked",
+  close: "close",
 };
 
 /**
