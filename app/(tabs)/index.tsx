@@ -10,6 +10,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Calculator from "@/components/custom/Calculator";
 import CustomButton from "@/components/custom/CustomButton";
 import { Colors } from "@/constants/Colors";
+import { router } from "expo-router";
 import React from "react";
 import Animated from "react-native-reanimated";
 import { data, faqData } from "../../utils/data";
@@ -78,7 +79,8 @@ export default function HomeScreen() {
     >
       <CustomView padding>
         <Collapsible
-          isOpen={openCollapsible === -1}
+          isOpen={true}
+          // isOpen={openCollapsible === -1}
           onToggle={() => handleToggle(-1)}
           title="Completa tu perfil"
           subtitle="Completados 0/7"
@@ -88,7 +90,7 @@ export default function HomeScreen() {
             textType="normalSubtitle"
             title="Validacion biometrica"
             bgColor={Colors.default.background}
-            onPress={() => {}}
+            onPress={() => router.push('/(views)/profile/biometric-view')}
           />
           <CustomButton
             icons

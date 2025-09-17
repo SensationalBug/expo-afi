@@ -4,7 +4,7 @@ import {
   DimensionValue,
   StyleSheet,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { ThemedText } from "../themed/ThemedText";
 import { IconSymbol } from "../ui/IconSymbol";

@@ -150,7 +150,7 @@ function Item({
         </TouchableWithoutFeedback>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <SlideWindow onClose={() => setModalVisible(false)}>
+            <SlideWindow isModal onClose={() => setModalVisible(false)} showButtons>
               <CarouselTitle title={title} subtitle={subtitle} icon={icon} />
               <CarouselDescription content={description} />
               <CarouselFooter content={posiblesUsos}/>

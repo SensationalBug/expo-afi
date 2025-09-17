@@ -15,11 +15,6 @@ export type IconSymbolName = keyof typeof MAPPING;
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
 const MAPPING: Partial<IconMapping> = {
-  "house.fill": "home",
-  "paperplane.fill": "send",
-  "chevron.left": "chevron-left",
-  "chevron.right": "chevron-right",
-  "newspaper.fill": "newspaper",
   // Iconos de los productos
   star: "star-outline",
   "line-chart": "stacked-line-chart",
@@ -29,11 +24,18 @@ const MAPPING: Partial<IconMapping> = {
   "event-seat": "event-seat",
   factory: "factory",
   // iconos varios
+  "house.fill": "home",
+  "paperplane.fill": "send",
+  "chevron.left": "chevron-left",
+  "chevron.right": "chevron-right",
+  "newspaper.fill": "newspaper",
   gear: "settings",
   bell: "notifications-none",
   check: "check",
   "circle.unchecked": "radio-button-unchecked",
   close: "close",
+  fingerprint: "fingerprint",
+  face:"face",
 };
 
 /**
@@ -49,7 +51,7 @@ export function IconSymbol({
 }: {
   name: IconSymbolName;
   size?: number;
-  color: string | OpaqueColorValue;
+  color?: string | OpaqueColorValue;
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
 }) {

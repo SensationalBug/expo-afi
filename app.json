@@ -13,6 +13,7 @@
       "bundleIdentifier": "com.sensationalbug.expoafi"
     },
     "android": {
+      "minSdkVersion": 26,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff",
@@ -38,7 +39,15 @@
         }
       ],
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Esta app necesita acceso a la cámara para validar tu identidad.",
+          "enableMicrophonePermission": false
+        }
+      ],
+      ["./expo-plugins/android-min-sdk.js", 26]
     ],
     "experiments": {
       "typedRoutes": true
