@@ -1,8 +1,7 @@
 import {
   PropsWithChildren,
   ReactElement,
-  forwardRef,
-  useImperativeHandle,
+  forwardRef
 } from "react";
 import { StyleSheet } from "react-native";
 import Animated, {
@@ -28,25 +27,6 @@ const ParallaxScrollView = forwardRef<Animated.ScrollView, Props>(
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
     const scrollOffset = useScrollViewOffset(scrollRef);
     const bottom = useBottomTabOverflow();
-
-    // Exponer métodos del scroll interno
-    useImperativeHandle(
-      ref,
-      () =>
-        ({
-          scrollTo: (options: {
-            x?: number;
-            y?: number;
-            animated?: boolean;
-          }) => {
-            scrollRef.current?.scrollTo(options);
-          },
-          scrollToEnd: (options?: { animated?: boolean }) => {
-            scrollRef.current?.scrollToEnd(options);
-          },
-          getScrollResponder: () => scrollRef.current?.getScrollResponder?.(),
-        } as any)
-    );
 
     const headerAnimatedStyle = useAnimatedStyle(() => {
       return {

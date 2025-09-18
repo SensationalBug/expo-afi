@@ -80,7 +80,7 @@ export function Collapsible({
   };
 
   return (
-    <View style={[{ padding: 5 }, style]}>
+    <View style={[{ margin: 4 }, style]}>
       <TouchableOpacity activeOpacity={0.5} onPress={toggleCollapsible}>
         <View
           style={{

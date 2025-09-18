@@ -1,41 +1,78 @@
 // CustomInput.tsx
 import { Colors } from "@/constants/Colors";
-import React, { useRef } from "react";
-import { StyleProp, StyleSheet, TextInput, TextStyle } from "react-native";
+import React, { useRef, useState } from "react";
+import {
+  KeyboardType,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextStyle,
+} from "react-native";
+import { Dropdown } from "react-native-element-dropdown";
+import { ThemedText } from "../themed/ThemedText";
+import { IconSymbol } from "../ui/IconSymbol";
 
 type CustomInputProps = {
   placeholder?: string;
   onChangeText?: (value: string) => void;
-  scrollToTop?: () => void;
   style?: StyleProp<TextStyle>;
+  title?: string;
+  keyboardType?: KeyboardType;
+  inputType?: "default" | "dropdown";
+  data?: { label: string; value: string }[];
 };
 
 const CustomInput = ({
   placeholder,
   onChangeText,
-  scrollToTop,
   style,
+  title,
+  keyboardType = "default",
+  inputType = "default",
+  data = [],
 }: CustomInputProps) => {
   const inputRef = useRef<TextInput>(null);
-
-  const handleFocus = () => {
-    if (scrollToTop) {
-      inputRef.current?.measureInWindow((x, y, width, height) => {
-        scrollToTop();
-      });
-    }
-  };
+  const [value, setValue] = useState(null);
 
   return (
-    <TextInput
-      ref={inputRef}
-      style={[styles.input, style]}
-      onFocus={handleFocus}
-      keyboardType="numeric"
-      placeholder={placeholder}
-      onChangeText={onChangeText}
-      placeholderTextColor={Colors.default.mutedText}
-    />
+    <>
+      {title && <ThemedText style={{ marginVertical: 10 }}>{title}</ThemedText>}
+      {inputType === "default" ? (
+        <TextInput
+          ref={inputRef}
+          style={[styles.input, style]}
+          keyboardType={keyboardType}
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          placeholderTextColor={Colors.default.mutedText}
+        />
+      ) : (
+        <Dropdown
+          style={styles.input}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="Selecciona una opcion"
+          value={value}
+          onChange={(item) => {
+            setValue(item.value);
+          }}
+          renderLeftIcon={() => (
+            <IconSymbol
+              style={styles.icon}
+              type="fontAwesome"
+              name="address-card"
+              size={20}
+            />
+          )}
+        />
+      )}
+    </>
   );
 };
 
@@ -43,13 +80,31 @@ export default CustomInput;
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: Colors.default.mutedText,
+    padding: 10,
+    fontSize: 16,
+    width: "100%",
+    minHeight: 50,
     borderWidth: 1,
     borderRadius: 10,
-    padding: 10,
-    minHeight: 50,
-    fontSize: 16,
-    width: "95%",
     color: Colors.default.text,
+    borderColor: Colors.default.mutedText,
+  },
+  icon: {
+    marginHorizontal: 10,
+    color: Colors.default.text,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
   },
 });

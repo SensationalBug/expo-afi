@@ -1,38 +1,68 @@
 import { Colors } from "@/constants/Colors";
 import { Image } from "expo-image";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import CustomButton from "../custom/CustomButton";
 import { ThemedText } from "../themed/ThemedText";
 import { IconSymbol } from "../ui/IconSymbol";
 
-type ProfileWindowProps = {
+type BiometricWindowProps = {
   title: string;
   subtitle: string;
   onPress?: () => void;
   buttonText?: string;
   icon?: string;
   photo?: string;
+  uriUpdater?: (
+    fieldName: "profilePhoto" | "CedFrontPhoto" | "CedBackPhoto",
+    value: string
+  ) => void;
+  photoField?: "profilePhoto" | "CedFrontPhoto" | "CedBackPhoto";
+  type?: "material" | "fontAwesome";
 };
 
-const ProfileWindow = ({
+const BiometricWindow = ({
   title,
   subtitle,
   onPress,
   buttonText = "",
   icon,
   photo,
-}: ProfileWindowProps) => {
+  photoField,
+  uriUpdater,
+  type,
+}: BiometricWindowProps) => {
   return (
     <View>
       <View style={styles.titleContainer}>
         {icon ? (
-          <IconSymbol name={icon} style={styles.icon} />
+          <IconSymbol name={icon} style={styles.icon} type={type} />
         ) : photo ? (
-          <Image source={{ uri: `file://${photo}` }} style={styles.image} />
-        ) : (
-          <Image source={require('@/assets/images/person.png')} style={styles.image} />
-        )}
+          <View>
+            <Image
+              source={
+                photo?.toString().split("/")[1] === "data"
+                  ? { uri: `file:///${photo}` }
+                  : photo
+              }
+              style={styles.image}
+            />
+            <TouchableOpacity
+              onPress={() =>
+                uriUpdater?.(
+                  photoField as
+                    | "profilePhoto"
+                    | "CedFrontPhoto"
+                    | "CedBackPhoto",
+                  ""
+                )
+              }
+              style={{ position: "absolute", top: 0, right: 0, margin: 10 }}
+            >
+              <IconSymbol name="delete" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        ) : null}
         <ThemedText type="title" style={styles.title}>
           {title}
         </ThemedText>
@@ -51,7 +81,7 @@ const ProfileWindow = ({
   );
 };
 
-export default ProfileWindow;
+export default BiometricWindow;
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -70,7 +100,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 350,
     borderWidth: 1,
-    borderRadius: 40,
+    borderRadius: 30,
     borderColor: Colors.default.background,
   },
   title: {

@@ -7,12 +7,7 @@ import CustomInput from "./CustomInput";
 import CustomText from "./CustomText";
 import Slider from "./Slider";
 
-
-type CalculatorProps = {
-  scrollToTop: () => void;
-};
-
-const Calculator = ({ scrollToTop }: CalculatorProps) => {
+const Calculator = () => {
   const [selectedCurrency, setSelectedCurrency] = React.useState("DOP");
   const [earningsData, setEarningsData] = React.useState({
     days: 30,
@@ -85,7 +80,7 @@ const Calculator = ({ scrollToTop }: CalculatorProps) => {
           onPress={() => setSelectedCurrency("EUR")}
         />
       </View>
-      <View style={{ alignItems: "center" }}>
+      <View>
         <CustomText
           alignSelf="flex-start"
           text={"Introduce el monto a invertir"}
@@ -93,7 +88,7 @@ const Calculator = ({ scrollToTop }: CalculatorProps) => {
         <CustomInput
           placeholder={`${selectedCurrency}$1000`}
           onChangeText={handleInputValue}
-          scrollToTop={scrollToTop}
+          keyboardType="numeric"
         />
         <CustomText
           text="El monto minimo para depositos es de RD$1,000.00 o su equivalente en

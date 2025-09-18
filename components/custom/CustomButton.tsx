@@ -2,9 +2,11 @@ import { Colors } from "@/constants/Colors";
 import React from "react";
 import {
   DimensionValue,
+  StyleProp,
   StyleSheet,
   TouchableOpacity,
-  View
+  View,
+  ViewStyle,
 } from "react-native";
 import { ThemedText } from "../themed/ThemedText";
 import { IconSymbol } from "../ui/IconSymbol";
@@ -24,6 +26,7 @@ type CustomButtonProps = {
     | "normalSubtitle";
   icons?: boolean;
   bgColor?: string;
+  style?: StyleProp<ViewStyle>;
 };
 
 const CustomButton = ({
@@ -36,11 +39,13 @@ const CustomButton = ({
   textType = "default",
   icons = false,
   bgColor,
+  style,
 }: CustomButtonProps) => {
   return (
     <TouchableOpacity
       disabled={disabled}
       style={[
+        style,
         styles.button,
         {
           width,
@@ -93,8 +98,7 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {
-    gap: 10,
-    margin:10,
+    margin: 10,
     padding: 10,
     minWidth: 80,
     elevation: 5,
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     flexDirection: "row",
-    boxShadow:Colors.default.boxShadow,
+    boxShadow: Colors.default.boxShadow,
     shadowColor: Colors.default.mutedText,
   },
   leftIcon: {

@@ -12,15 +12,9 @@ import CustomButton from "@/components/custom/CustomButton";
 import { Colors } from "@/constants/Colors";
 import { router } from "expo-router";
 import React from "react";
-import Animated from "react-native-reanimated";
 import { data, faqData } from "../../utils/data";
 
 export default function HomeScreen() {
-  const scrollRef = React.useRef<Animated.ScrollView>(null);
-  const scrollToTop = () => {
-    // scrollRef.current?.scrollTo({ y: 400, animated: true });
-  };
-
   const [openCollapsible, setOpenCollapsible] = React.useState<number | null>(
     null
   );
@@ -47,7 +41,6 @@ export default function HomeScreen() {
 
   return (
     <ParallaxScrollView
-      ref={scrollRef}
       header={
         <View style={[styles.headerContainer]}>
           <FontAwesome5
@@ -90,13 +83,14 @@ export default function HomeScreen() {
             textType="normalSubtitle"
             title="Validacion biometrica"
             bgColor={Colors.default.background}
-            onPress={() => router.push('/(views)/profile/biometric-view')}
+            onPress={() => router.push("/(views)/profile/biometric-view")}
           />
           <CustomButton
             icons
             textType="normalSubtitle"
             title="Datos personales"
             bgColor={Colors.default.background}
+            onPress={() => router.push("/(views)/profile/personal-data")}
           />
           <CustomButton
             icons
@@ -143,7 +137,7 @@ export default function HomeScreen() {
           }
           alignSelf="flex-start"
         >
-          <Calculator scrollToTop={scrollToTop} />
+          <Calculator />
         </Collapsible>
       </CustomView>
 

@@ -1,5 +1,6 @@
 // Fallback for using MaterialIcons on Android and web.
 
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SymbolWeight } from "expo-symbols";
 import { ComponentProps } from "react";
@@ -35,7 +36,8 @@ const MAPPING: Partial<IconMapping> = {
   "circle.unchecked": "radio-button-unchecked",
   close: "close",
   fingerprint: "fingerprint",
-  face:"face",
+  face: "face",
+  delete: "delete",
 };
 
 /**
@@ -48,19 +50,28 @@ export function IconSymbol({
   size = 24,
   color,
   style,
+  type = "material",
 }: {
   name: IconSymbolName;
   size?: number;
   color?: string | OpaqueColorValue;
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
+  type?: "material" | "fontAwesome";
 }) {
-  return (
+  return type === "material" ? (
     <MaterialIcons
       size={size}
       color={color}
       style={style}
       name={MAPPING[name]}
+    />
+  ) : (
+    <FontAwesome5
+      size={size}
+      color={color}
+      style={style}
+      name={name}
     />
   );
 }

@@ -22,12 +22,16 @@ import {
 } from "react-native-vision-camera-face-detector";
 import { Worklets } from "react-native-worklets-core";
 
+// "profilePhoto" |"CedFrontPhoto"|"CedBackPhoto"
 export default function FaceValidationScreen({
   onClose,
-  setPhotoUri,
-}: { 
+  uriUpdater,
+}: {
   onClose?: () => void;
-  setPhotoUri?: any;
+  uriUpdater?: (
+    fieldName: "profilePhoto" | "CedFrontPhoto" | "CedBackPhoto",
+    value: string
+  ) => void;
 }) {
   const device = useCameraDevice("front");
   const { hasPermission, requestPermission } = useCameraPermission();
@@ -158,8 +162,8 @@ export default function FaceValidationScreen({
   const takePicture = async () => {
     if (cameraRef.current) {
       const photo = await cameraRef.current.takePhoto();
-      const photoUri = photo.path;
-      setPhotoUri(photoUri);
+      uriUpdater?.("profilePhoto", photo.path);
+      onClose?.();
     }
   };
 
