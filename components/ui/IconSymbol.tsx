@@ -38,6 +38,7 @@ const MAPPING: Partial<IconMapping> = {
   fingerprint: "fingerprint",
   face: "face",
   delete: "delete",
+  calendar: "calendar-month",
 };
 
 /**
@@ -67,11 +68,6 @@ export function IconSymbol({
       name={MAPPING[name]}
     />
   ) : (
-    <FontAwesome5
-      size={size}
-      color={color}
-      style={style}
-      name={name}
-    />
+    <FontAwesome5 size={size} color={color} style={style} name={name} />
   );
 }

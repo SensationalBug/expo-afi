@@ -1,19 +1,27 @@
-import CustomButton from "@/components/custom/CustomButton";
-import CustomDatePicker from "@/components/custom/CustomDatePicker";
 import CustomInput from "@/components/custom/CustomInput";
+import Loader from "@/components/custom/Loader";
 import SlideWindow from "@/components/custom/SlideWindow";
+import BiometricWindow from "@/components/profile/BiometricWindow";
+import ContinueButton from "@/components/profile/ContinueButton";
+import PersonalDataWindow from "@/components/profile/PersonalDataWindow";
+import YesOrNot from "@/components/profile/YesOrNot";
 import { ThemedText } from "@/components/themed/ThemedText";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
+import {
+    GENDERDATA,
+    INPUTDATA,
+    MUNICIPIOSDATA,
+    NACIONALIDADDATA,
+    PAISESDATA,
+    PROVINCIASDATA,
+} from "@/utils/data";
 import { router, Stack } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Button, Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 const PersonalDataView = () => {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   // Este useEffect estara aqui solo para simular la validacion de los datos.
   useEffect(() => {
@@ -24,15 +32,6 @@ const PersonalDataView = () => {
     }
   }, [currentPage]);
 
-  const INPUTDATA = [
-    { label: "Cedula", value: "cedula" },
-    { label: "Pasaporte", value: "pasaporte" },
-  ];
-
-  const GENDERDATA = [
-    { label: "Cedula", value: "cedula" },
-    { label: "Pasaporte", value: "pasaporte" },
-  ];
   return (
     <>
       <Stack.Screen
@@ -65,90 +64,152 @@ const PersonalDataView = () => {
       />
       <SlideWindow
         enableSwipe={false}
-        showIndicators={false}
+        showIndicators={currentPage > 4 ? false : true}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       >
-        <View style={{}}>
-          <CustomInput
-            title="Tipo de documento"
-            inputType="dropdown"
-            data={INPUTDATA}
-          />
-          <CustomInput title="Numero de documento" keyboardType="numeric" />
-          <CustomInput title="Nombres" />
-          <CustomInput title="Apellidos" />
-          <CustomInput title="Genero" inputType="dropdown" data={GENDERDATA} />
-          <CustomInput title="Fecha de nacimiento" />
-          <View>
-            <Button
-              title="Seleccionar Fecha"
-              onPress={() => setShowDatePicker(true)}
+        <PersonalDataWindow
+          childrenButton={
+            <ContinueButton
+              title="Continuar"
+              onPress={() => setCurrentPage(currentPage + 1)}
             />
-            {selectedDate && (
-              <Text style={{ marginTop: 20 }}>
-                Fecha seleccionada: {selectedDate.getDate()}/
-                {selectedDate.getMonth() + 1}/{selectedDate.getFullYear()}
-              </Text>
-            )}
-            <CustomDatePicker
-              visible={showDatePicker}
-              onClose={() => setShowDatePicker(false)}
-              onConfirm={(date) => {
-                setSelectedDate(date);
-                setShowDatePicker(false);
-              }}
-              initialDate={new Date()}
+          }
+        >
+          <>
+            <CustomInput
+              title="Tipo de documento"
+              data={INPUTDATA}
+              inputType="dropdown"
+              dropdownIcon="address-card"
             />
-          </View>
-          <CustomButton
-            height={60}
-            title={"Continuar"}
-            textType="subtitle"
-            onPress={() => setCurrentPage(currentPage + 1)}
-            titleColor={Colors.default.whiteText}
-          />
+            <CustomInput title="Numero de documento" keyboardType="numeric" />
+            <CustomInput title="Nombre completo" />
+            <CustomInput
+              title="Genero"
+              data={GENDERDATA}
+              inputType="dropdown"
+              dropdownIcon="transgender"
+            />
+            <CustomInput
+              title="Fecha de nacimiento"
+              inputType="date"
+              placeholder="Introduce tu fecha de nacimiento"
+            />
+          </>
+        </PersonalDataWindow>
+
+        <PersonalDataWindow
+          title="Nacionalidad y residencia"
+          childrenButton={
+            <ContinueButton
+              title="Continuar"
+              onPress={() => setCurrentPage(currentPage + 1)}
+            />
+          }
+        >
+          <>
+            <CustomInput
+              title="Selecciona tu nacionalidad"
+              data={NACIONALIDADDATA}
+              inputType="dropdown"
+            />
+            <CustomInput
+              title="Selecciona tu pais de residencia"
+              data={PAISESDATA}
+              inputType="dropdown"
+            />
+            <CustomInput title="Posee segunda nacionalidad?" />
+          </>
+        </PersonalDataWindow>
+
+        <PersonalDataWindow
+          title="Direccion"
+          childrenButton={
+            <ContinueButton
+              title="Continuar"
+              onPress={() => setCurrentPage(currentPage + 1)}
+            />
+          }
+        >
+          <>
+            <CustomInput title="Pais" data={PAISESDATA} inputType="dropdown" />
+            <CustomInput
+              title="Provincia"
+              data={PROVINCIASDATA}
+              inputType="dropdown"
+            />
+            <CustomInput
+              title="Municipio"
+              data={MUNICIPIOSDATA}
+              inputType="dropdown"
+            />
+            <CustomInput title="Sector" />
+            <CustomInput title="Calle" />
+            <CustomInput title="Numero de casa" />
+          </>
+        </PersonalDataWindow>
+        <PersonalDataWindow
+          childrenButton={
+            <ContinueButton
+              title="Continuar"
+              onPress={() => setCurrentPage(currentPage + 1)}
+            />
+          }
+        >
+          <>
+            <YesOrNot
+              onPress={() => console.log("1")}
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, nobis?"
+              subtitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae
+                      blanditiis ratione vitae officia, quia voluptate reprehenderit facere
+                      eos ea delectus."
+            />
+            <YesOrNot
+              onPress={() => console.log("2")}
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, nobis?"
+              subtitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae
+        blanditiis ratione vitae officia, quia voluptate reprehenderit facere
+        eos ea delectus."
+            />
+            <YesOrNot
+              onPress={() => console.log("3")}
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, nobis?"
+              subtitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae
+        blanditiis ratione vitae officia, quia voluptate reprehenderit facere
+        eos ea delectus."
+            />
+            <YesOrNot
+              onPress={() => console.log("4")}
+              title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, nobis?"
+              subtitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae
+        blanditiis ratione vitae officia, quia voluptate reprehenderit facere
+        eos ea delectus."
+            />
+          </>
+        </PersonalDataWindow>
+        <View
+          style={{
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Loader />
+          <ThemedText type="title" style={{ marginVertical: 10 }}>
+            Validando tus datos...
+          </ThemedText>
+          <ThemedText type="normalSubtitle" style={{ textAlign: "center" }}>
+            Esto tomara solo un momento. No cierres la aplicacion
+          </ThemedText>
         </View>
-        <View>
-          <ThemedText>KLK</ThemedText>
-          <CustomButton
-            height={60}
-            title={"KLK"}
-            textType="subtitle"
-            onPress={() => setCurrentPage(currentPage + 1)}
-            titleColor={Colors.default.whiteText}
-          />
-        </View>
-        <View>
-          <ThemedText>KLK</ThemedText>
-          <CustomButton
-            height={60}
-            title={"KLK"}
-            textType="subtitle"
-            onPress={() => setCurrentPage(currentPage + 1)}
-            titleColor={Colors.default.whiteText}
-          />
-        </View>
-        <View>
-          <ThemedText>KLK</ThemedText>
-          <CustomButton
-            height={60}
-            title={"KLK"}
-            textType="subtitle"
-            onPress={() => setCurrentPage(currentPage + 1)}
-            titleColor={Colors.default.whiteText}
-          />
-        </View>
-        <View>
-          <ThemedText>KLK</ThemedText>
-          <CustomButton
-            height={60}
-            title={"KLK"}
-            textType="subtitle"
-            onPress={() => setCurrentPage(currentPage + 1)}
-            titleColor={Colors.default.whiteText}
-          />
-        </View>
+        <BiometricWindow
+          title="Verificacion exitosa"
+          subtitle="Tu identidad ha sido verificada con extio. Ahora puedes continuar con el proceso de completar tu perfil"
+          onPress={() => router.back()}
+          buttonText="Continuar a la pantalla principal"
+          icon="check"
+        />
       </SlideWindow>
     </>
   );

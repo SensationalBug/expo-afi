@@ -4,6 +4,8 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -89,7 +91,7 @@ export default function SlideWindow({
       // Solo actualizar estado interno si no hay control externo
       setInternalCurrentPage(newPage);
     }
-    
+
     scrollViewRef.current?.scrollTo({
       x: (newPage - 1) * width,
       animated: true,
@@ -112,11 +114,11 @@ export default function SlideWindow({
 
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const page = Math.round(contentOffsetX / width) + 1;
-    
+
     if (!externalCurrentPage) {
       setInternalCurrentPage(page);
     }
-    
+
     onPageChange?.(page);
   };
 
@@ -156,26 +158,30 @@ export default function SlideWindow({
           />
         </View>
       )}
-
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        pagingEnabled={slides.length > 1 && enableSwipe} // ✅ Paginación condicional
-        decelerationRate="fast"
-        showsHorizontalScrollIndicator={false}
-        scrollEnabled={slides.length > 1 && enableSwipe} // ✅ Scroll condicional
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollValue } } }],
-          { useNativeDriver: false, listener: handleScroll }
-        )}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
       >
-        {slides.map((child, index) => (
-          <View style={[styles.card]} key={index}>
-            {child}
-          </View>
-        ))}
-      </ScrollView>
-
+        <ScrollView
+          ref={scrollViewRef}
+          horizontal
+          pagingEnabled={slides.length > 1 && enableSwipe} // ✅ Paginación condicional
+          decelerationRate="fast"
+          showsHorizontalScrollIndicator={false}
+          scrollEnabled={slides.length > 1 && enableSwipe} // ✅ Scroll condicional
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollValue } } }],
+            { useNativeDriver: false, listener: handleScroll }
+          )}
+        >
+          {slides.map((child, index) => (
+            <View style={[styles.card]} key={index}>
+              {child}
+            </View>
+          ))}
+        </ScrollView>
+      </KeyboardAvoidingView>
       {/* ✅ Botones de navegación */}
       {showButtons ? (
         <>
@@ -258,7 +264,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 40,
     paddingVertical: 15,
     position: "absolute",
     flexDirection: "row",

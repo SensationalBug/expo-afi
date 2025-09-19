@@ -2,9 +2,9 @@ import { Colors } from "@/constants/Colors";
 import { Image } from "expo-image";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import CustomButton from "../custom/CustomButton";
 import { ThemedText } from "../themed/ThemedText";
 import { IconSymbol } from "../ui/IconSymbol";
+import ContinueButton from "./ContinueButton";
 
 type BiometricWindowProps = {
   title: string;
@@ -69,13 +69,7 @@ const BiometricWindow = ({
         <ThemedText style={styles.subtitle}>{subtitle}</ThemedText>
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton
-          height={60}
-          title={buttonText}
-          textType="subtitle"
-          onPress={onPress}
-          titleColor={Colors.default.whiteText}
-        />
+        <ContinueButton title={buttonText} onPress={onPress} />
       </View>
     </View>
   );

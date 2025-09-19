@@ -27,6 +27,8 @@ type CustomButtonProps = {
   icons?: boolean;
   bgColor?: string;
   style?: StyleProp<ViewStyle>;
+  margin?: number;
+  opacity?: number;
 };
 
 const CustomButton = ({
@@ -40,6 +42,8 @@ const CustomButton = ({
   icons = false,
   bgColor,
   style,
+  margin = 10,
+  opacity,
 }: CustomButtonProps) => {
   return (
     <TouchableOpacity
@@ -50,7 +54,8 @@ const CustomButton = ({
         {
           width,
           height,
-          opacity: disabled ? 0.6 : 1,
+          margin,
+          opacity: opacity || (disabled ? 0.6 : 1),
           justifyContent: icons ? "space-between" : "center",
           backgroundColor: bgColor || Colors.default.buttonBackground,
         },
@@ -98,7 +103,6 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {
-    margin: 10,
     padding: 10,
     minWidth: 80,
     elevation: 5,

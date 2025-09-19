@@ -72,7 +72,7 @@ const BiometricView = () => {
       />
       <SlideWindow
         enableSwipe={false}
-        showIndicators={false}
+        showIndicators={currentPage > 4 ? false : true}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       >
@@ -141,7 +141,7 @@ const BiometricView = () => {
         <BiometricWindow
           title="Verificacion exitosa"
           subtitle="Tu identidad ha sido verificada con extio. Ahora puedes continuar con el proceso de completar tu perfil"
-          onPress={() => router.back()}
+          onPress={() => router.push("/(tabs)")}
           buttonText="Continuar a la pantalla principal"
           icon="check"
         />
